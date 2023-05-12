@@ -1,0 +1,6 @@
+services:
+  container-name:
+    container_name: container-name
+    build: .
+    image: image-name
+    tty: true
