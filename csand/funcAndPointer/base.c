@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 void func(void){
-	printf("ポインタで呼び出す");	
+	printf("ポインタで呼び出す");
 }
 
 int main(){
