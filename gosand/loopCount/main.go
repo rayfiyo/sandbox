@@ -11,6 +11,6 @@ func main() {
 		if k%5 == 0 {
 			i++
 		}
-		fmt.Println((i-(k/5))/2)
+		fmt.Println((i - (k / 5)) / 2)
 	}
 }
