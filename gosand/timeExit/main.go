@@ -1,32 +1,28 @@
 package main
 
 import (
-	"context"
 	"fmt"
 	"time"
 )
 
 func main() {
-	timeLimit := time.Millisecond * 1990
-
-	// コンテキストの作成
-	ctx, cancel := context.WithTimeout(context.Background(), timeLimit)
-	defer cancel()
-
-	// 非同期で処理を実行
+	// 1500ms後に終了するチャネルを作成
+	timeLimit := time.Millisecond * 1500
+	done := time.After(timeLimit)
 	now := time.Now()
-	go func() {
-		// 処理を書く
-		for {
-			fmt.Printf("")
-		}
-	}()
 
-	// コンテキストを待機
-	select {
-	case <-ctx.Done():
-		// タイムアウトやキャンセルが発生した場合の処理
-		fmt.Printf("経過: %vms\n", time.Since(now).Milliseconds())
-		fmt.Println("Timeout or canceled:", ctx.Err())
+	// チャネルが通知されるまで処理を実行
+	for {
+		select {
+		case <-done:
+			// チャネルが通知されたら終了
+			fmt.Println("終了")
+			fmt.Printf("経過: %vms\n", time.Since(now).Milliseconds())
+			return
+		default:
+			// チャネルが通知されるまで処理を実行
+			fmt.Printf("")
+			continue
+		}
 	}
 }
