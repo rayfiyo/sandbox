@@ -1,0 +1,6 @@
+services:
+  container-name:
+    container_name: wailsand
+    build: .
+    image: golang:1.21.5
+    tty: true
