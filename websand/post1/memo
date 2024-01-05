@@ -1,0 +1,32 @@
+const  = async () => {
+    const eventData = {
+      title: newEvent.title,
+      url: newEvent.url,
+      description: newEvent.description,
+      deadline: newEvent.deadline,
+      day: newEvent.day,
+    };
+
+    if () {
+      alert("イベント名を入力してください");
+      return;
+    }
+    try {
+      const response = await fetch("/api/Category", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(),
+      });
+
+      if (response.ok) {
+        // リクエストが成功した場合の処理
+        console.log(".");
+      } else {
+        // リクエストが失敗した場合の処理
+        console.error("Failed to create event.");
+      }
+    } catch (error) {
+      console.error("Error creating event:", error);
+    }
