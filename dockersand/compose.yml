@@ -8,3 +8,10 @@ services:
 
 #   working_dir: /usr/src
 #   command: hoge
+
+#   A note on "image:" by me in my study
+#   If you do not specify an image in the Dockerfile or do not use a Dockerfile?
+#   or you want to create an image by specifying the image name?
+#   勉強中の私による"image:"についてのメモ
+#   Dockerfileにイメージを指定しない場合や，Dockerfileを使わない場合？
+#   或いはイメージ名を指定して作成したい場合？
