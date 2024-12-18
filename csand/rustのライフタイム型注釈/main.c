@@ -13,7 +13,7 @@ int *func2(int *one, int *two) {
 void noname(int *i1, int *i2, int *one) {
   int two = 2;
   i1 = func1(one, &two); // <-- (1)
-  printf("(2)\n");
+  printf("(1)\n");
   i2 = func2(one, &two); // <-- (2)
   printf("(2)\n");
 }
