@@ -20,11 +20,12 @@ type GeminiLLMGateway struct {
 
 // NewGeminiLLMGateway: コンストラクタ
 
-func NewGeminiLLMGateway(ctx context.Context, apiKey string) (*GeminiLLMGateway, error) {
+func NewGeminiLLMGateway(apiKey string) (*GeminiLLMGateway, error) {
 	if apiKey == "" {
 		return nil, fmt.Errorf("GEMINI_API_KEY is not set")
 	}
 
+	ctx := context.Background()
 	client, err := genai.NewClient(ctx, option.WithAPIKey(apiKey))
 	if err != nil {
 		return nil, fmt.Errorf("failed to create gemini client: %w", err)
@@ -51,7 +52,8 @@ func NewGeminiLLMGateway(ctx context.Context, apiKey string) (*GeminiLLMGateway,
 
 // GenerateCultureUpdate: LLMGatewayインタフェース
 // ここではストリーミングなしで結果をまとめて取得する例
-func (g *GeminiLLMGateway) GenerateCultureUpdate(ctx context.Context, prompt string) string {
+func (g *GeminiLLMGateway) GenerateCultureUpdate(prompt string) string {
+	ctx := context.Background()
 	resp, err := g.model.GenerateContent(ctx, genai.Text(prompt))
 	if err != nil {
 		log.Fatal(err)
@@ -81,15 +83,13 @@ func (g *GeminiLLMGateway) GenerateCultureUpdateStreaming(ctx context.Context, p
 }
 
 func main() {
-	ctx := context.Background()
-
 	apiKey := os.Args[1]
-	g, err := NewGeminiLLMGateway(ctx, apiKey)
+	g, err := NewGeminiLLMGateway(apiKey)
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer g.client.Close()
 
-	fmt.Println(g.GenerateCultureUpdate(ctx, `踊りの文化`))
+	fmt.Println(g.GenerateCultureUpdate(`踊りの文化`))
 	// fmt.Println(g.GenerateCultureUpdateStreaming(ctx, `踊りの文化`))
 }
